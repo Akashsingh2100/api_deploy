@@ -19,7 +19,7 @@ class CatDogClassifier(nn.Module):
 
 # --- Load the Trained Model ---
 model = CatDogClassifier()  # Initialize model
-model.load_state_dict(torch.load(r"E:\ml_assignment_tut\cat_vs_dog_state1.pth", map_location="cpu"))  # Load weights
+model.load_state_dict(torch.load(r"cat_vs_dog_state1.pth", map_location="cpu"))  # Load weights
 model.eval()  # Set model to evaluation mode
 
 # --- Define Image Transformations ---
