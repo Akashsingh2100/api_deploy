@@ -4,6 +4,8 @@ from PIL import Image
 import torch
 import torch.nn as nn
 import io
+import os
+import uvicorn
 
 app = FastAPI()
 
@@ -32,6 +34,10 @@ transform = transforms.Compose([
 # --- Class Labels ---
 classes = ["Cat", "Dog"]
 
+@app.get("/")
+async def read_root():
+    return {"message": "Service is running!"}
+
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
     try:
@@ -51,5 +57,6 @@ async def predict(file: UploadFile = File(...)):
 
 # --- Run the API ---
 if __name__ == "__main__":
+    import os
     port = int(os.getenv("PORT", 8000))  # Render sets the PORT dynamically
     uvicorn.run(app, host="0.0.0.0", port=port)
